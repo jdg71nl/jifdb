@@ -1,4 +1,8 @@
-# Logs
+# .gitignore
+
+jifdb/
+
+# # Logs
 logs
 *.log
 npm-debug.log*

@@ -1,0 +1,30 @@
+{
+  "name": "jifdb",
+  "version": "1.0.0",
+  "description": "a 'JSON File Database' is a minimalist CommonJS module using a JSON file backend and CRUD accessors",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdg71nl/jifdb.git"
+  },
+  "keywords": [
+    "JSON",
+    "Database",
+    "File-based",
+    "minimalist",
+    "minimal"
+  ],
+  "author": "John@de-Graaff.net",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/jdg71nl/jifdb/issues"
+  },
+  "homepage": "https://github.com/jdg71nl/jifdb#readme",
+  "dependencies": {
+    "mocha": "^9.1.2",
+    "root-require": "^0.3.1"
+  }
+}
