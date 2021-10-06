@@ -29,26 +29,54 @@ const app_version = 'v' + pjson.version || 'v?.?.?';
 //
 const Jifdb = class {
   constructor() {
+    // private
     this._my_classname = 'Jifdb';
     this._app_version = app_version;
-    this.db_path = '';
-    this.collections = {};
+    this._is_opened = false;
     this._show_debug = false;
+    // public
+    this.collections = {};
+    this.db_path = '';
   }
   open_database(props) {
     const db_path = props.db_path;
-    try {
-      if (!fs.existsSync(db_path)) {
-          fs.mkdirSync(db_path);
-          if (this._show_debug) console.log(`# JifDB: (open_database) created folder path "${db_path}" `);
+    if (this._is_opened) {
+      //
+    } else {
+      this._is_opened = true;
+      this.db_path = db_path;
+      //
+      try {
+        if (!fs.existsSync(db_path)) {
+            fs.mkdirSync(db_path);
+            if (this._show_debug) console.log(`# JifDB: (open_database) created folder path "${db_path}" `);
+        }
+      } catch (err) {
+          console.log(err);
       }
-    } catch (err) {
-        console.log(err);
+      //
+      if (this._show_debug) console.log(`# JifDB: (open_database) opened DB with path "${db_path}" `);
+      if (Object.keys(props).includes('show_debug') && typeof props.show_debug === "boolean") {
+        this._show_debug = props.show_debug;
+      }
+      //  
     }
-    this.db_path = db_path;
-    if (this._show_debug) console.log(`# JifDB: (open_database) opened DB with path "${db_path}" `);
-    if (Object.keys(props).includes('show_debug') && typeof props.show_debug === "boolean") {
-      this._show_debug = props.show_debug;
+  }
+  close_database() {
+    if (!this._is_opened) {
+      //
+    } else {
+      for (let col_name in Object.keys(this.collections)) {
+        let col = this.collections[col_name];
+        if (col._dirty) {
+          col.save();
+        }
+      }
+      this._is_opened = false;
+      this._show_debug = false;
+      this.db_path = '';
+      this.collections = {};
+      //
     }
   }
   get_collection(props) {
@@ -87,9 +115,13 @@ const Jifdb = class {
     }
     //
     if (fs.existsSync(file_path)) {
+      const now = Math.floor( Date.now() / 1000 );
       try {
-        fs.unlinkSync(file_path);
-        if (this._show_debug) console.log(`# JifDB: (clear_collection) unlinked file: ${file_path} `);
+        //
+        // fs.unlinkSync(file_path);
+        fs.renameSync( file_path, file_path + '.' + now + '.bak' );
+        //
+        if (this._show_debug) console.log(`# JifDB: (clear_collection) unlinked (or renamed) file: ${file_path} `);
       } catch (err) {
         console.error(err);
       }  
@@ -100,15 +132,18 @@ const Jifdb = class {
 
 const Jifcollection = class {
   constructor(props) {
+    // private
     this._my_classname = 'Jifcollection';
+    this._dirty = false;
+    this._next_id = 1;
+    // public
     this.collection_name = props.collection_name;
     this.file_path = props.file_path;
-    this.next_id = 1;
     this.data = [];
   }
   _empty_file() {
     this.data = [];
-    this.next_id = 1;
+    this._next_id = 1;
   }
   _read_file() {
     try {
@@ -120,29 +155,50 @@ const Jifcollection = class {
       console.error(err);
     }
     const max_id = Math.max(...this.data.map(item => item.id));
-    this.next_id = max_id + 1;
+    this._next_id = max_id + 1;
   }
-  add_item(item) {
+  save() {
+    if (this._dirty) {
+      this._dirty = false;
+      const JsonString = JSON.stringify(this.data, null, 2);
+      try {
+        fs.writeFileSync(this.file_path, JsonString);
+      } catch (err) {
+        console.error(err);
+      }  
+    }
+  }
+  //
+  // CRUD accessors:
+  create_item(item) {
     let new_item = null;
     if (item && isObject(item)) {
       new_item = item;
-      new_item.id = this.next_id;
-      this.next_id = this.next_id + 1;
+      new_item.id = this._next_id;
+      this._next_id = this._next_id + 1;
       this.data.push(new_item);
-      this.save();
+      //
+      // this.save();
+      this._dirty = true;
+      //
     } else {
-      if (this._show_debug) console.log(`# JifDB: (add_item) ERROR not a valid item: ${JSON.stringify(item)} `);
+      if (this._show_debug) console.log(`# JifDB: (create_item) ERROR not a valid item: ${JSON.stringify(item)} `);
     }
     return new_item;
   }
-  save() {
-    const JsonString = JSON.stringify(this.data, null, 2);
-    try {
-      fs.writeFileSync(this.file_path, JsonString);
-    } catch (err) {
-      console.error(err);
-    }
+  read_items() {
+    return this.data;
   }
+  read_id({id}) {
+    return this.data.find(item => item.id == id);
+  }
+  update_id({id}) {
+    const this_item = this.data.find(item => item.id == id);
+  }
+  delete_id({id}) {
+    const this_item = this.data.find(item => item.id == id);
+  }
+  //
 }
 
 var jif_db = new Jifdb();
