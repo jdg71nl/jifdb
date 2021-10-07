@@ -22,10 +22,17 @@ const app_version = 'v' + pjson.version || 'v?.?.?';
 // const jif_db = require('./jifdb');
 // jif_db.open_database({ db_path: path.join(__dirname, 'jifdb') });
 //
-// do in your model script like <users.js>:
+// do in your model/script like <users.js>:
 // const jif_db = require('../jifdb');
-// let users = jif_db.get_collection({collection_name: "users"});
+// let users = jif_db.open_collection({collection_name: "users"});
 
+// Jifdb public methods:
+//
+// Jifdb.open_database({db_path:db_path})
+// Jifdb.close_database()
+// Jifdb.open_collection({collection_name: "col_name"}) => returns: a Jifcollection
+// Jifdb.close_collection({collection_name: "col_name"})
+// Jifdb.delete_collection({collection_name: "col_name"})
 //
 const Jifdb = class {
   constructor() {
@@ -39,9 +46,15 @@ const Jifdb = class {
     this.db_path = '';
   }
   open_database(props) {
+    let success = false;
     const db_path = props.db_path;
+    // if (Object.keys(props).includes('show_debug') && typeof props.show_debug === "boolean") {
+    if (Object.keys(props).includes('show_debug')) {
+      this._show_debug = props.show_debug;
+      if (this._show_debug) console.log(`# JifDB: (open_database) enabled show_debug `);
+    }
     if (this._is_opened) {
-      //
+      success = false;
     } else {
       this._is_opened = true;
       this.db_path = db_path;
@@ -56,15 +69,14 @@ const Jifdb = class {
       }
       //
       if (this._show_debug) console.log(`# JifDB: (open_database) opened DB with path "${db_path}" `);
-      if (Object.keys(props).includes('show_debug') && typeof props.show_debug === "boolean") {
-        this._show_debug = props.show_debug;
-      }
       //  
     }
+    return success;
   }
   close_database() {
+    let success = false;
     if (!this._is_opened) {
-      //
+      if (this._show_debug) console.log(`# JifDB: (close_database) DB not open with path "${db_path}" `);
     } else {
       for (let col_name in Object.keys(this.collections)) {
         let col = this.collections[col_name];
@@ -77,9 +89,11 @@ const Jifdb = class {
       this.db_path = '';
       this.collections = {};
       //
+      success = true;
     }
+    return success;
   }
-  get_collection(props) {
+  open_collection(props) {
     const col_name = props.collection_name;
     let file_path = path.join(this.db_path, col_name + ".json");
     let new_collection = null;
@@ -93,7 +107,7 @@ const Jifdb = class {
         } else {
           fs.closeSync(fs.openSync(file_path, 'w'));
           new_collection._empty_file();
-          if (this._show_debug) console.log(`# JifDB: (get_collection) created file: ${file_path} `);
+          if (this._show_debug) console.log(`# JifDB: (open_collection) created file: ${file_path} `);
         }
         this.collections[col_name] = new_collection;
       }
@@ -102,34 +116,63 @@ const Jifdb = class {
     }
     return new_collection;
   }
-  clear_collection(props) {
+  close_collection(props) {
+    let success = false;
+    const col_name = props.collection_name;
+    if (col_name) {
+      success = true
+    };
+    if (Object.keys(this.collections).includes(col_name)) {
+      let col = this.collections[col_name];
+      if (col._dirty) {
+        col.save();
+      }
+      delete this.collections[col_name];
+      if (this._show_debug) console.log(`# JifDB: (close_collection) removed collection ${col_name} from collections `);
+    }
+    return success;
+  }
+  delete_collection(props) {
+    let success = false;
     const col_name = props.collection_name;
     let file_path = path.join(this.db_path, col_name + ".json");
+    if (col_name) {
+      success = true
+    };
     //
-    if (this.collections.includes(col_name)) {
-      const index = this.collections.indexOf(col_name);
-      if (index > -1) {
-        this.collections.splice(index, 1);
-      }
-      if (this._show_debug) console.log(`# JifDB: (clear_collection) removed collection ${col_name} from collections `);
-    }
+    // if (Object.keys(this.collections).includes(col_name)) {
+    //   delete this.collections[col_name];
+    //   if (this._show_debug) console.log(`# JifDB: (delete_collection) removed collection ${col_name} from collections `);
+    // }
+    this.close_collection(props);
     //
     if (fs.existsSync(file_path)) {
-      const now = Math.floor( Date.now() / 1000 );
+      const now_secs = Math.floor( Date.now() / 1000 );
+      const file_bak = `${file_path}.${now_secs}.bak`;
       try {
         //
         // fs.unlinkSync(file_path);
-        fs.renameSync( file_path, file_path + '.' + now + '.bak' );
+        fs.renameSync( file_path, file_bak );
         //
-        if (this._show_debug) console.log(`# JifDB: (clear_collection) unlinked (or renamed) file: ${file_path} `);
+        if (this._show_debug) console.log(`# JifDB: (delete_collection) unlinked (or renamed) file: ${file_path} `);
       } catch (err) {
         console.error(err);
+        success = false;
       }  
     }
-    //
+    return success;
   }
 }
 
+// Jifcollection public methods:
+//
+// Jifcollection.create({item:{ key1:"value1", key2:"value2" }})
+// Jifcollection.read({})
+// Jifcollection.read({id: id})
+// Jifcollection.update({id: id})
+// Jifcollection.delete({id: id})
+// Jifcollection.save()
+//
 const Jifcollection = class {
   constructor(props) {
     // private
@@ -189,15 +232,27 @@ const Jifcollection = class {
   }
   read(props) {
     const id = props.id;
-    return this.data.find(item => item.id == id);
+    if (id) {
+      return this.data.find(item => item.id == id);
+    } else {
+      return this.data;
+    }
   }
   update(props) {
+    let this_item = null;
     const id = props.id;
-    const this_item = this.data.find(item => item.id == id);
+    if (id) {
+      this_item = this.data.find(item => item.id == id);
+    }
+    return this_item;
   }
   delete(props) {
+    let this_item = null;
     const id = props.id;
-    const this_item = this.data.find(item => item.id == id);
+    if (id) {
+      this_item = this.data.find(item => item.id == id);
+    }
+    return this_item;
   }
   //
 }
