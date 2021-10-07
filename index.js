@@ -170,7 +170,8 @@ const Jifcollection = class {
   }
   //
   // CRUD accessors:
-  create_item(item) {
+  create(props) {
+    const item = props.item;
     let new_item = null;
     if (item && isObject(item)) {
       new_item = item;
@@ -186,16 +187,16 @@ const Jifcollection = class {
     }
     return new_item;
   }
-  read_items() {
-    return this.data;
-  }
-  read_id({id}) {
+  read(props) {
+    const id = props.id;
     return this.data.find(item => item.id == id);
   }
-  update_id({id}) {
+  update(props) {
+    const id = props.id;
     const this_item = this.data.find(item => item.id == id);
   }
-  delete_id({id}) {
+  delete(props) {
+    const id = props.id;
     const this_item = this.data.find(item => item.id == id);
   }
   //
