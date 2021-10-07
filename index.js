@@ -1,7 +1,9 @@
 // jifdb: index.js
-//
+// - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - 
 // Description  : a 'JSON File Database' is a minimalist CommonJS module using a JSON file backend and CRUD accessors
 // Homepage     : https://github.com/jdg71nl/jifdb
+// Package home : https://www.npmjs.com/package/jifdb
+// - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - 
 
 const path = require('path');
 const fs = require('fs');
@@ -16,16 +18,18 @@ function isObject(val) {
 let pjson = require('root-require')('package.json');
 const app_version = 'v' + pjson.version || 'v?.?.?';
 
+// - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - 
 // Usage:
 //
 // do in <app.js> or <index.js>:
-// const jif_db = require('./jifdb');
+// const jif_db = require('jifdb');
 // jif_db.open_database({ db_path: path.join(__dirname, 'jifdb') });
 //
 // do in your model/script like <users.js>:
-// const jif_db = require('../jifdb');
+// const jif_db = require('jifdb');
 // let users = jif_db.open_collection({collection_name: "users"});
 
+// - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - 
 // Jifdb public methods:
 //
 // Jifdb.open_database({db_path:db_path})
@@ -45,30 +49,35 @@ const Jifdb = class {
     this.collections = {};
     this.db_path = '';
   }
+  // Public methods:
   open_database(props) {
     let success = false;
-    const db_path = props.db_path;
+    const db_path = props.db_path ?? '.';
+    //
     // if (Object.keys(props).includes('show_debug') && typeof props.show_debug === "boolean") {
     if (Object.keys(props).includes('show_debug')) {
       this._show_debug = props.show_debug;
       if (this._show_debug) console.log(`# JifDB: (open_database) enabled show_debug `);
     }
+    //
     if (this._is_opened) {
       success = false;
+      if (this._show_debug) console.log(`# JifDB: (open_database) ERROR can't open DB which is already open `);
     } else {
       this._is_opened = true;
       this.db_path = db_path;
-      //
+      this.collections = {};
       try {
         if (!fs.existsSync(db_path)) {
-            fs.mkdirSync(db_path);
-            if (this._show_debug) console.log(`# JifDB: (open_database) created folder path "${db_path}" `);
+          fs.mkdirSync(db_path);
+          if (this._show_debug) console.log(`# JifDB: (open_database) created folder path "${db_path}" `);
         }
       } catch (err) {
-          console.log(err);
+        console.log(err);
       }
       //
       if (this._show_debug) console.log(`# JifDB: (open_database) opened DB with path "${db_path}" `);
+      success = true;
       //  
     }
     return success;
@@ -76,7 +85,8 @@ const Jifdb = class {
   close_database() {
     let success = false;
     if (!this._is_opened) {
-      if (this._show_debug) console.log(`# JifDB: (close_database) DB not open with path "${db_path}" `);
+      success = false;
+      if (this._show_debug) console.log(`# JifDB: (close_database) ERROR can't close DB which is not open `);
     } else {
       for (let col_name in Object.keys(this.collections)) {
         let col = this.collections[col_name];
@@ -157,13 +167,13 @@ const Jifdb = class {
         if (this._show_debug) console.log(`# JifDB: (delete_collection) unlinked (or renamed) file: ${file_path} `);
       } catch (err) {
         console.error(err);
-        success = false;
       }  
     }
     return success;
   }
 }
 
+// - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - 
 // Jifcollection public methods:
 //
 // Jifcollection.create({item:{ key1:"value1", key2:"value2" }})
@@ -184,6 +194,7 @@ const Jifcollection = class {
     this.file_path = props.file_path;
     this.data = [];
   }
+  // Private methods:
   _empty_file() {
     this.data = [];
     this._next_id = 1;
@@ -200,6 +211,7 @@ const Jifcollection = class {
     const max_id = Math.max(...this.data.map(item => item.id));
     this._next_id = max_id + 1;
   }
+  // Public methods:
   save() {
     if (this._dirty) {
       this._dirty = false;
@@ -243,6 +255,7 @@ const Jifcollection = class {
     const id = props.id;
     if (id) {
       this_item = this.data.find(item => item.id == id);
+      // this._dirty = true;
     }
     return this_item;
   }
@@ -251,14 +264,20 @@ const Jifcollection = class {
     const id = props.id;
     if (id) {
       this_item = this.data.find(item => item.id == id);
+      // this._dirty = true;
     }
     return this_item;
   }
   //
 }
 
+// - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - 
+// singleton (ish)
+//
 var jif_db = new Jifdb();
 
+// - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - 
 module.exports = jif_db;
 
+// - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - 
 //-EOF

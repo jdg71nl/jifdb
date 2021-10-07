@@ -1,6 +1,6 @@
 // jifdb: test/test.js
 // this test is built on: https://mochajs.org/
-// - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - 
+// - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - 
 
 // https://nodejs.org/api/assert.html
 const assert = require('assert');
@@ -8,7 +8,7 @@ const assert = require('assert');
 // function describe(){}
 // function it(){}
 
-// - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - 
+// - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - 
 // utility functions
 
 function _isObject(val) {
@@ -40,7 +40,7 @@ function _is_empty_array(arr) {
   return (arr && Array.isArray(arr) && arr.length === 0);
 }
 
-// - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - 
+// - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - 
 // start test
 
 const path = require('path');
@@ -115,5 +115,5 @@ describe('read()', function() {
   });
 });
 
-// - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - 
+// - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - - - - - - - + + + - - - - - - 
 //-EOF
