@@ -2,6 +2,14 @@
 
 A 'JSON File Database' is a minimalist CommonJS module using a JSON file backend and CRUD accessors
 
+## install
+
+Info on: https://www.npmjs.com/package/jifdb
+
+```
+npm install jifdb --save
+```
+
 ### Usage
 
 ```
