@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xl="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" version="1.1" viewBox="-372.5 -48.5 889 253" width="889" height="253">
+  <defs>
+    <font-face font-family="Menlo" font-size="12" panose-1="2 11 6 9 3 8 4 2 2 4" units-per-em="1000" underline-position="-63.47656" underline-thickness="43.94531" slope="0" x-height="546.875" cap-height="729.0039" ascent="928.2227" descent="-235.83984" font-weight="400">
+      <font-face-src>
+        <font-face-name name="Menlo-Regular"/>
+      </font-face-src>
+    </font-face>
+    <marker orient="auto" overflow="visible" markerUnits="strokeWidth" id="FilledArrow_Marker" stroke-linejoin="miter" stroke-miterlimit="10" viewBox="-1 -4 10 8" markerWidth="10" markerHeight="8" color="black">
+      <g>
+        <path d="M 8 0 L 0 -3 L 0 3 Z" fill="currentColor" stroke="currentColor" stroke-width="1"/>
+      </g>
+    </marker>
+  </defs>
+  <metadata> Produced by OmniGraffle 7.18.5\n2021-10-12 07:37:38 +0000</metadata>
+  <g id="Canvas_1" fill="none" stroke-opacity="1" stroke-dasharray="none" stroke="none" fill-opacity="1">
+    <title>Canvas 1</title>
+    <rect fill="white" x="-372.5" y="-48.5" width="889" height="253"/>
+    <g id="Canvas_1_Layer_1">
+      <title>Layer 1</title>
+      <g id="Graphic_7">
+        <rect x="-12" y="-36" width="204" height="228" fill="white"/>
+        <path d="M -12 -36 L 192 -36 L 192 192 L -12 192 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4.0,4.0" stroke-width="1"/>
+        <text transform="translate(-7 -31)" fill="black">
+          <tspan font-family="Menlo" font-size="12" font-weight="400" fill="black" x="0" y="11">module: jifdb/index.js</tspan>
+        </text>
+      </g>
+      <g id="Graphic_2">
+        <rect x="0" y="48" width="156" height="24" fill="white"/>
+        <rect x="0" y="48" width="156" height="24" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(5 53)" fill="black">
+          <tspan font-family="Menlo" font-size="12" font-weight="400" fill="black" x="0" y="11">class: Jifdb</tspan>
+        </text>
+      </g>
+      <g id="Graphic_3">
+        <rect x="24" y="108" width="156" height="24" fill="white"/>
+        <rect x="24" y="108" width="156" height="24" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(29 113)" fill="black">
+          <tspan font-family="Menlo" font-size="12" font-weight="400" fill="black" x="0" y="11">class: Jifcollection</tspan>
+        </text>
+      </g>
+      <g id="Graphic_4">
+        <rect x="0" y="0" width="156" height="24" fill="white"/>
+        <rect x="0" y="0" width="156" height="24" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(5 5)" fill="black">
+          <tspan font-family="Menlo" font-size="12" font-weight="400" fill="black" x="0" y="11">singleton: jifdb</tspan>
+        </text>
+      </g>
+      <g id="Line_5">
+        <line x1="78" y1="24" x2="78" y2="38.1" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_6">
+        <path d="M 78 72 L 78 81 L 102 90 L 102 98.1" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_8">
+        <rect x="-360" y="-36" width="324" height="228" fill="white"/>
+        <path d="M -360 -36 L -36 -36 L -36 192 L -360 192 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4.0,4.0" stroke-width="1"/>
+        <text transform="translate(-355 -31)" fill="black">
+          <tspan font-family="Menlo" font-size="12" font-weight="400" fill="black" x="0" y="11">your App.js:</tspan>
+        </text>
+      </g>
+      <g id="Graphic_9">
+        <rect x="-348" y="0" width="288" height="24" fill="white"/>
+        <rect x="-348" y="0" width="288" height="24" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(-343 5)" fill="black">
+          <tspan font-family="Menlo" font-size="12" font-weight="400" fill="black" x="0" y="11">jif_db = require(&apos;jifdb&apos;)</tspan>
+        </text>
+      </g>
+      <g id="Graphic_10">
+        <rect x="-348" y="108" width="288" height="24" fill="white"/>
+        <rect x="-348" y="108" width="288" height="24" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(-343 113)" fill="black">
+          <tspan font-family="Menlo" font-size="12" font-weight="400" fill="black" x="0" y="11">col = jif_db.open_collection(col_name)</tspan>
+        </text>
+      </g>
+      <g id="Line_11">
+        <line x1="0" y1="12" x2="-50.1" y2="12" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4.0,4.0" stroke-width="1"/>
+      </g>
+      <g id="Graphic_12">
+        <rect x="-348" y="48" width="288" height="24" fill="white"/>
+        <rect x="-348" y="48" width="288" height="24" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(-343 53)" fill="black">
+          <tspan font-family="Menlo" font-size="12" font-weight="400" fill="black" x="0" y="11">jif_db.open_database(db_folder)</tspan>
+        </text>
+      </g>
+      <g id="Line_13">
+        <line x1="-204" y1="24" x2="-204" y2="38.1" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_14">
+        <line x1="-204" y1="72" x2="-204" y2="98.1" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_15">
+        <rect x="-348" y="156" width="288" height="24" fill="white"/>
+        <rect x="-348" y="156" width="288" height="24" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(-343 161)" fill="black">
+          <tspan font-family="Menlo" font-size="12" font-weight="400" fill="black" x="0" y="11">item = col.read(id)</tspan>
+        </text>
+      </g>
+      <g id="Line_16">
+        <line x1="-204" y1="132" x2="-204" y2="146.1" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_17">
+        <rect x="216" y="-36" width="288" height="228" fill="white"/>
+        <path d="M 216 -36 L 504 -36 L 504 192 L 216 192 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4.0,4.0" stroke-width="1"/>
+        <text transform="translate(221 -31)" fill="black">
+          <tspan font-family="Menlo" font-size="12" font-weight="400" fill="black" x="0" y="11">your storage:</tspan>
+        </text>
+      </g>
+      <g id="Graphic_18">
+        <rect x="240" y="108" width="252" height="24" fill="white"/>
+        <rect x="240" y="108" width="252" height="24" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(245 113)" fill="black">
+          <tspan font-family="Menlo" font-size="12" font-weight="400" fill="black" x="0" y="11">open: ./db_folder/col_name.json</tspan>
+        </text>
+      </g>
+      <g id="Graphic_20">
+        <rect x="240" y="48" width="252" height="24" fill="white"/>
+        <rect x="240" y="48" width="252" height="24" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(245 53)" fill="black">
+          <tspan font-family="Menlo" font-size="12" font-weight="400" fill="black" x="0" y="11">mkdir: ./db_folder/</tspan>
+        </text>
+      </g>
+      <g id="Line_21">
+        <line x1="366" y1="72" x2="366" y2="98.1" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_23">
+        <line x1="156" y1="60" x2="230.1" y2="60" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4.0,4.0" stroke-width="1"/>
+      </g>
+      <g id="Line_24">
+        <line x1="180" y1="120" x2="230.1" y2="120" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4.0,4.0" stroke-width="1"/>
+      </g>
+    </g>
+  </g>
+</svg>
