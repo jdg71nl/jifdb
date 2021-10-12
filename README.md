@@ -16,11 +16,11 @@ npm install jifdb --save
 
 ```
 // do in <app.js> or <index.js>:
-const jif_db = require('./jifdb');
-jif_db.open_database({ db_path: path.join(__dirname, 'jifdb') });
+const jif_db = require('jifdb');
+jif_db.open_database({ db_path: path.join(__dirname, 'jifdb_dir') });
 
 // do in your model/script like <users.js>:
-const jif_db = require('../jifdb');
+const jif_db = require('jifdb');
 let users = jif_db.open_collection({collection_name: "users"});
 
 // CRUD on collection:
