@@ -2,7 +2,11 @@
 
 A 'JSON File Database' is a minimalist CommonJS module using a JSON file backend and CRUD accessors, and using promises.
 
-`Please note(!): I am in the process of developing and testing this module, and adding promises. I also found some bugs. Anyone that wants to use this module probably better wait for 2.x, which should be ready in about 1 week (18-oct-2021).`
+_Please note(!):_ `I am in the process of developing and testing this module, and adding promises. I also found some bugs. Anyone that wants to use this module probably better wait for 2.x, which should be ready in about 1 week (18-oct-2021).`
+
+## Design
+
+![Jifdb-design](Jifdb-design-v1.0.svg)
 
 ## Installation
 
