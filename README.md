@@ -6,7 +6,7 @@ _Please note(!):_ `I am in the process of developing and testing this module, an
 
 ## Design
 
-![image of local file: Jifdb-design-v1.0.svg](Jifdb-design-v1.0.svg)
+![image of local file: Jifdb-design-v1.0.svg](./doc/Jifdb-design-v1.0.svg)
 
 ## Installation
 
