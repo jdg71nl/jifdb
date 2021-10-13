@@ -47,7 +47,7 @@ const path = require('path');
 const jif_db = require('../index');
 
 const db_path = path.join(__dirname, 'jifdb');
-jif_db.open_database({ db_path: db_path, show_debug: true });
+jif_db.open_database({ db_path: db_path, verbose: true });
 //
 describe('open_database', function() {
   it('should open and optionally create the db_path folder', function() {
