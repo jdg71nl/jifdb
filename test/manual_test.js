@@ -6,14 +6,23 @@ const db_path = path.join(__dirname, 'jifdb');
 // console.log(`# manual_test.js: db_path = ${db_path} `);
 
 const jif_db = require('../index'); // import 'jifdb' module from local dir
+const verbose = true;
 
-const verbose = false;
+// [TEST] should fail if invalid db_path:
+// jif_db.open_database({ db_path: 123, verbose: verbose })
+//   .then(() => { console.log('# manual_test.js: Connected to JifDB ...'); })
+//   .catch(err => {
+//     console.error(`# manual_test.js: Error.message = ${err.message} `);
+//     // // process.exitCode = 1; //  <== optional
+//     // process.exit(1);  // https://nodejs.dev/learn/how-to-exit-from-a-nodejs-program
+//   })
+// ;
+
+// [TEST] should open if valid db_path:
 jif_db.open_database({ db_path: db_path, verbose: verbose })
   .then(() => { console.log('# manual_test.js: Connected to JifDB ...'); })
   .catch(err => {
     console.error(`# manual_test.js: Error.message = ${err.message} `);
-    // process.exitCode = 1; //  <== optional
-    process.exit(1);  // https://nodejs.dev/learn/how-to-exit-from-a-nodejs-program
   })
 ;
 
@@ -22,10 +31,11 @@ jif_db.open_database({ db_path: db_path, verbose: verbose })
 //   console.log(`# manual_test.js: setTimeout-callback `);
 // }, 3000);
 // console.log(`# manual_test.js: after `);
-
+//
 // console.log(`# manual_test.js: waiting 3000 ms ...`);
 // setTimeout(() => { console.log(`# manual_test.js: ... waiting done!`); }, 3000);
 
+// [TEST] should fail if already open before:
 // jif_db.open_database({ db_path: db_path, verbose: true })
 //   .then(() => { console.log('# manual_test.js: Connected to JifDB ...'); })
 //   .catch(err => {
@@ -34,6 +44,7 @@ jif_db.open_database({ db_path: db_path, verbose: verbose })
 //   })
 // ;
 
+// [TEST] should close:
 // jif_db.close_database()
 //   .then(() => { console.log('# manual_test.js: Closed JifDB.'); })
 //   .catch(err => {
@@ -42,6 +53,7 @@ jif_db.open_database({ db_path: db_path, verbose: verbose })
 //   })
 // ;
 
+// [TEST] should fail if already closed before:
 // jif_db.close_database()
 // .then(() => { console.log('# manual_test.js: Closed JifDB.'); })
 // .catch(err => {

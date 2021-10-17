@@ -70,11 +70,19 @@ const Jifdb = class {
       }
       this._is_opened = true;
       //
-      if (!props.db_path || props.db_path === '') {
+      // // nice way to sanitize an (argument) string, seen in this course:
+      // // https://www.pirple.com/courses/take/the-nodejs-master-class/lessons/3820498-adding-a-cli
+      // const myfunc = function(str) {
+      //   str = typeof(str) === 'string' && str.trim().length > 0 ? str.trim() : false;
+      // }
+      // const db_path = props.db_path && typeof(props.db_path) === 'string' && props.db_path.trim().length > 0 ? props.db_path.trim() : null;
+      // or in 2 steps:
+      let db_path = props.db_path; // || undenfined
+      db_path = db_path && typeof(db_path) === 'string' && db_path.trim().length > 0 ? db_path.trim() : null;
+      if (!db_path) {
         reject(new Error('no property db_path provided.'));
         return;
       }
-      const db_path = props.db_path;
       this.db_path = db_path;
       //
       // https://nodejs.org/api/fs.html
@@ -130,11 +138,12 @@ const Jifdb = class {
     const func_name = 'open_collection';
     return new Promise((resolve, reject) => {
       //
-      if (!props.collection_name || props.collection_name === '') {
+      let col_name = props.collection_name; // sanitize ..
+      col_name = col_name && typeof(col_name) === 'string' && col_name.trim().length > 0 ? col_name.trim() : null;
+      if (!col_name) {
         reject(new Error('no property collection_name provided.'));
         return;
       }
-      const col_name = props.collection_name;
       //
       let file_path = path.join(this.db_path, col_name + ".json");
       let new_collection = null;
