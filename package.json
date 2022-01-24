@@ -1,6 +1,6 @@
 {
   "name": "jifdb",
-  "version": "1.3.0",
+  "version": "1.4.1",
   "description": "a 'JSON File Database' is a minimalist CommonJS module using a JSON file backend and CRUD accessors",
   "main": "index.js",
   "scripts": {
