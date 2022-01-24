@@ -2,7 +2,9 @@
 
 `Jifdb` is a Promise based JSON.file Database for Node.js applications - a minimal CommonJS module using JSON-file storage and CRUD (Create, Read, Update, Delete) accessors.
 
-_Please note(!):_ `I am in the process of developing and testing this module, and adding promises. I also found some bugs. Anyone that wants to use this module probably better wait for 2.x, which should be ready in about 1 week (18-oct-2021).`
+_Please note(!):_ 
+
+`I am in the process of developing and testing this module, and adding promises. I also found some bugs. Anyone that wants to use this module probably better wait for 2.x.`
 
 ## Design
 
