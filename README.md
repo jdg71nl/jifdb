@@ -8,7 +8,7 @@ _Please note(!):_
 
 ## Design
 
-![image of local file: Jifdb-design-v1.0.svg](./doc/Jifdb-design-v1.0.svg)
+![image of local file: Jifdb-design-v1.1.svg](./doc/Jifdb-design-v1.1.svg)
 
 ## Installation
 
