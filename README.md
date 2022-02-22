@@ -23,25 +23,25 @@ npm install jifdb --save
 ```
 // do in <app.js> or <index.js>:
 const jif_db = require('jifdb');
-jif_db.open_database({ db_path: path.join(__dirname, 'jifdb_dir') });
+const jif_db = await jif_db.open_database({ db_path: path.join(__dirname, 'jifdb_data') });
 
 // do in your model/script like <users.js>:
 const jif_db = require('jifdb');
-let users = jif_db.open_collection({collection_name: "users"});
+let users_coll = jif_db.open_collection({collection_name: "users"});
 
 // CRUD on collection:
-const new_user      = users.create({item:{ key1:"value1", key2:"value2" }});
-const current_users = users.read();                   // all items in collection
-const get_user      = users.read({id:new_user.id});   // read one item
+const new_user  = users.create({item:{ key1:"value1", key2:"value2" }});  // wil create unique _id property
+const all_users = users.read();                                           // all items in collection
+const get_user  = users.read({id:new_user.id});                           // read one item
 
 // Jifdb public methods:
 Jifdb.open_database({db_path:db_path})
 Jifdb.close_database()
-Jifdb.open_collection({collection_name: "col_name"}) => returns: a Jifcollection
-Jifdb.close_collection({collection_name: "col_name"})
-Jifdb.delete_collection({collection_name: "col_name"})
+Jifdb.open_collection({collection_name: "coll_name"}) => returns: a Jifcollection
+Jifdb.close_collection({collection_name: "coll_name"})
+Jifdb.delete_collection({collection_name: "coll_name"})
 
-// Jifcollection public methods:
+// Jifcollection public methods (CRUD):
 Jifcollection.create({item:{ key1:"value1", key2:"value2" }})
 Jifcollection.read({id: id})
 Jifcollection.update({id: id})

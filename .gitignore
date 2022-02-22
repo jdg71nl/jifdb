@@ -1,6 +1,7 @@
 # .gitignore
 
-jifdb/
+jifdb_data/
+package-lock.json
 
 # # Logs
 logs
