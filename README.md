@@ -1,6 +1,6 @@
 # Jifdb
 
-`Jifdb` is a Promise based JSON.file Database for Node.js applications - a minimal CommonJS module using JSON-file storage and CRUD (Create, Read, Update, Delete) accessors.
+`Jifdb` is a synchronous JSON.file-based Database for Node.js applications - a minimal CommonJS module using JSON-file storage and CRUD (Create, Read, Update, Delete) accessors.
 
 _Please note(!):_ 
 
@@ -8,7 +8,7 @@ _Please note(!):_
 
 ## Design
 
-![image of local file: Jifdb-design-v1.1.svg](./doc/Jifdb-design-v1.1.svg)
+![image of local file: Jifdb-design-v1.2.svg](./doc/Jifdb-design-v1.2.svg)
 
 ## Installation
 
